@@ -1,6 +1,6 @@
 username: superhu
 baseurl: /
-markdown: redcarpet
+markdown: kramdown
 safe: false
 pygments: true
 title: superhu's blog 
