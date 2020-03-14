@@ -1,4 +1,4 @@
-package top.wasm.blog;
+package top.wasm.blog.util;
 
 import com.alibaba.fastjson.JSON;
 import lombok.Builder;

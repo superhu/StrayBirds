@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 引入数据库连接配置 -->
+    <properties resource="application.properties"/>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 配置 tk.mybatis 插件 -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="top.wasm.blog.config.MyBaseMapper"/>
+        </plugin>
+
+        <!-- 配置数据库连接 -->
+        <jdbcConnection
+                driverClass="${spring.datasource.druid.driver-class-name}"
+                connectionURL="${spring.datasource.druid.url}"
+                userId="${spring.datasource.druid.username}"
+                password="${spring.datasource.druid.password}">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <!-- 配置实体类存放路径 -->
+        <javaModelGenerator targetPackage="top.wasm.blog.vo" targetProject="src/main/java">
+         <!--   <property name="trimStrings" value="true" />--><!-- 从数据库返回的值被清理前后的空格 -->
+        </javaModelGenerator>
+
+        <!-- 配置 XML 存放路径 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+
+        <!-- 配置 DAO 存放路径 -->
+        <javaClientGenerator
+                targetPackage="top.wasm.blog.dao"
+                targetProject="src/main/java"
+                type="XMLMAPPER"/>
+
+        <!-- 配置需要指定生成的数据库和表，% 代表所有表 -->
+       <!-- <table  tableName="post">
+            &lt;!&ndash; mysql 配置 &ndash;&gt;
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>-->
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是
+      实体类名-->
+        <!--catalog="Blog"-->
+        <table  schema="blog" tableName="post">
+            <!-- mysql 配置 -->
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>

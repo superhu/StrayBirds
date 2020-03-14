@@ -1,14 +1,22 @@
 package top.wasm.blog;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import top.wasm.blog.util.RestClient;
+import top.wasm.blog.vo.Post;
 
-@SpringBootTest
+//@SpringBootTest
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = BlogApplication.class)
 class BlogApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void test1() {
 		String result = RestClient.builder().method(HttpMethod.GET).url("http://localhost:8080/blog/post/list")
 				.queryParam("title", "ccc")
 				.build().execute();
@@ -17,9 +25,10 @@ class BlogApplicationTests {
 	}
 
 	public static void main(String[] args) {
-		deletePost();
+		getHtml();
+//		deletePost();
 //		addPost();
-		queryPost(args);
+//		queryPost(args);
 	}
 
 	private static void queryPost(String[] args) {
@@ -42,6 +51,13 @@ class BlogApplicationTests {
 		String result = RestClient.builder().method(HttpMethod.DELETE).url("http://localhost:8080/blog/post/delete/{id}")
 				.pathVariable("id","ddd")
 				.build().execute();
+		System.out.println(result);
+	}
+	private static void getHtml(){
+		String result = RestClient.builder().method(HttpMethod.GET).url("http://www.baidu.com")
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML_VALUE)
+				.build()
+				.execute();
 		System.out.println(result);
 	}
 
