@@ -2,6 +2,8 @@ package top.wasm.blog.vo;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,6 +11,8 @@ import java.util.Date;
 @Table(name="post")
 @Builder
 @Data
+@Accessors(chain = true)
+@RequiredArgsConstructor(staticName = "of")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

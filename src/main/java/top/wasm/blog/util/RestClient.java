@@ -1,6 +1,7 @@
 package top.wasm.blog.util;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.Singular;
@@ -59,7 +60,8 @@ public class RestClient {
         return responseBody;
     }
 
-    public static void main(String[] args) {
-        System.out.println(JSON.toJSON(null));
+    public <T> T execute2Type(TypeReference<T> type){
+        return JSON.parseObject(execute(), type);
     }
+
 }

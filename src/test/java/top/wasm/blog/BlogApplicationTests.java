@@ -1,5 +1,6 @@
 package top.wasm.blog;
 
+import com.alibaba.fastjson.TypeReference;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import top.wasm.blog.util.RestClient;
 import top.wasm.blog.vo.Post;
+
+import java.util.List;
 
 //@SpringBootTest
 @RunWith(SpringRunner.class)
@@ -25,21 +28,23 @@ class BlogApplicationTests {
 	}
 
 	public static void main(String[] args) {
-		getHtml();
+//		getHtml();
 //		deletePost();
 //		addPost();
-//		queryPost(args);
+		queryPost(args);
 	}
 
 	private static void queryPost(String[] args) {
-		String result = RestClient.builder().method(HttpMethod.GET).url("http://localhost:8080/blog/post/list")
+		List<Post> posts = RestClient.builder().method(HttpMethod.GET).url("http://localhost:8080/blog/post/list")
 				.queryParam("title", "ddd")
-				.build().execute();
-		System.out.println(result);
+				.build().execute2Type(new TypeReference<List<Post>>() {
+				});
+		System.out.println(posts);
 	}
 
 	private static void addPost() {
 		Post post = Post.builder().title("ddd").content("dddddddd").build();
+		Post post1 = Post.of().setTitle("dddd").setContent("oooo");
 		String result = RestClient.builder().method(HttpMethod.POST).url("http://localhost:8080/blog/post/add")
 				.body(post)
 				.build().execute();
