@@ -1,30 +1,32 @@
 package top.wasm.blog.vo;
 
-import lombok.Builder;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.Accessors;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Table(name="post")
-@Builder
+//@Table(name="post")
+
+//@Builder
+@TableName("post")
 @Data
-@Accessors(chain = true)
-@RequiredArgsConstructor(staticName = "of")
+//@Accessors(chain = true)
+//@RequiredArgsConstructor(staticName = "of")
+//@NoArgsConstructor
 public class Post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(value = "id")
     private Integer id;
 
-    @Column(name="title")
+//    @Column(name="title")
     private String title;
 
-    @Column(name = "create_time")
+//    @Column(name = "create_time")
     private Date createTime;
 
-    @Column(name = "content")
+//    @Column(name = "content")
     private String content;
 
 

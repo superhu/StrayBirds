@@ -1,5 +1,6 @@
 package top.wasm.blog.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.web.bind.annotation.*;
 import top.wasm.blog.dao.PostMapper;
 import top.wasm.blog.vo.Post;
@@ -18,8 +19,8 @@ public class PostController {
 
     @GetMapping("/list")
     public List<Post> posts(String title) {
-
-        return postMapper.selectAll();
+        QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
+        return postMapper.selectList(queryWrapper);
     }
 
     @PostMapping("/add")
@@ -30,13 +31,13 @@ public class PostController {
     @DeleteMapping("/delete/{id}")
     public void deletePost(@PathVariable("id") Integer id) {
 
-        postMapper.deleteByPrimaryKey(id);
+        postMapper.deleteById(id);
     }
 
     @PutMapping("/update")
     public void updatePost(@RequestBody Post post) {
 
-        postMapper.updateByPrimaryKey(post);
+        postMapper.updateById(post);
 
     }
 }
